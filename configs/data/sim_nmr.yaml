@@ -1,0 +1,13 @@
+name: sim_nmr
+
+data:
+  data_root: /home/rudra/Spectro/downloaded/data/final_data/nmr_text/nmr_text_data_with_hall_kier.h5
+  # data_root: /home/${user}/projects/def-ravh011/shared_data/
+  dataset: sim_nmr
+  batch_size: 64
+  num_workers: 3
+  tokenizer: ${system.model.tokenizer}
+  split_ratio: [0.7, 0.15, 0.15]
+  #split_ratio: [0.01, 0.01, 0.98]
+  target_type: 'hall_kier' # 'binary' or 'numerical' or 'hall_kier'
+  assertion: False

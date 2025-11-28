@@ -1,0 +1,28 @@
+defaults:
+  - data: sim_ir
+  - system: jirvis
+  - _self_
+
+user: edwinc
+
+seed: 42
+process_title: spectro-training
+
+# output_dir: /home/${user}/projects/def-ravh011/shared_data/spectro/${system.name}/${data.name}
+output_dir: /home/rudra/spectro/logs/${system.name}/${data.name}
+
+
+load_system_checkpoint:
+mode: train
+
+device:
+  cuda_visible_devices:  "0,1,2,3,4,5,6"
+  id: 0
+  cuda: cuda:${device.id}
+  
+#   output_subdir: config
+#   run:
+#     dir: ${output_dir}
+#   sweep:
+#     dir: ${output_dir}
+#     subdir: ${hydra.job.override_dirname}

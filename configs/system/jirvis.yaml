@@ -1,0 +1,72 @@
+name: jirvis
+
+
+model:
+  name: resnet # used in logging dir name
+  arch: 
+    _target_: models.resnet50.ResNetFeatureExtractor
+    num_labels: 25
+    model_name: R50 # R101, R52
+    model_type: 3_layer   #       standard, residual, squeeze, 4_layer
+    channels: 3
+
+
+train:
+  optimizer:
+    _target_: torch.optim.AdamW
+    lr: 7.5e-5
+    weight_decay: 1e-2
+
+  loss_func:
+    _target_: torch.nn.BCEWithLogitsLoss
+
+  lr_scheduler:
+
+
+  trainer:
+    _target_: pytorch_lightning.Trainer
+    _convert_: all
+    max_epochs: 50 # 100 # 60000
+    check_val_every_n_epoch: 2
+    precision: 16-mixed
+
+    # val_check_interval : 1 # 500 # 50 # 3000
+    # log_every_n_steps: 1
+    # limit_val_batches: 1
+    # limit_test_batches: 1
+    # devices:
+    #   - ${device.id} 
+    accumulate_grad_batches: 4
+
+    accelerator: gpu   
+    devices: [1,2,3]
+    strategy: ddp
+
+    enable_model_summary: false
+
+    callbacks:
+    - _target_: pytorch_lightning.callbacks.ModelCheckpoint
+      monitor: 'val_loss'
+      mode: 'min'
+      save_top_k: 1
+      save_last: true
+      filename: 'jirvis-{epoch}-{best_acc:.4f}'
+      
+    - _target_: pytorch_lightning.callbacks.ModelCheckpoint
+#       dirpath: ${output_dir}/${system.name}/checkpoints
+      filename: "{epoch}-{acc:.4f}"
+      monitor: 'val_loss'
+      mode: 'max'
+      save_top_k: 1
+      save_last: false
+      verbose: true
+      
+    - _target_: pytorch_lightning.callbacks.TQDMProgressBar
+      # leave: true
+      refresh_rate: 1
+
+    logger:
+      _target_: pytorch_lightning.loggers.TensorBoardLogger
+      save_dir: ${output_dir}/${system.model.name}
+      name: '.'
+      version: '.'

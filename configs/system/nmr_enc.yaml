@@ -1,0 +1,88 @@
+name: nmr_enc
+
+
+model:
+  arch:
+    _target_: models.transformer_encoder.NMRTransformerRegressor
+    vocab_size: 
+    d_model: 256
+    nhead: 8
+    dim_feedforward: 1024
+    num_layers: 4
+    num_classes: 15 #if hall_kier, num classes: 15. if 'numerical' or 'binary', num classes: 19
+    max_len: 300
+    dropout: 0.1
+    activation: 'relu'
+    norm_first: True
+    batch_first: True
+    use_scalar: True
+    n_scalar_features: 1  
+    scalar_num_layers: 2
+    scalar_hidden_dim: ${system.model.arch.d_model}
+  tokenizer:
+    _target_: models.nmr_tokenizer.NMRTokenizer
+    max_length: 300
+    vocab_path: /home/rudra/rudra_learns/bruh/nmr_vocab_2.json
+    split_decimals: False
+
+
+
+train:
+  optimizer:
+    _target_: torch.optim.AdamW
+    lr: 1e-3
+    weight_decay: 0.01
+
+  loss_func:
+    _target_: torch.nn.MSELoss
+    # pos_weight:            # ${class_weights}
+
+  lr_scheduler:
+
+  trainer:
+    _target_: pytorch_lightning.Trainer
+    _convert_: all
+    max_epochs: 40 # 100 # 60000
+    check_val_every_n_epoch: 1
+    # val_check_interval : 1 # 500 # 50 # 3000
+    log_every_n_steps: 1
+    precision: 16-mixed
+    # limit_val_batches: 1
+    # limit_test_batches: 1
+    # devices:
+    #   - ${device.id}
+
+    # Multi gpu training flags:
+    # accelerator: gpu
+    devices: [5]
+
+    # strategy: ddp
+
+    enable_model_summary: false
+
+    callbacks:
+    - _target_: pytorch_lightning.callbacks.ModelCheckpoint
+      monitor: 'val_loss'
+      mode: 'min'
+      save_top_k: 1
+      save_last: true
+      filename: 'jirvis-{epoch}-{best_acc:.4f}'
+      
+#     - _target_: pytorch_lightning.callbacks.ModelCheckpoint
+# #       dirpath: ${output_dir}/${system.name}/checkpoints
+#       filename: "{epoch}-{r2:.4f}"
+#       monitor: 'val_r2'
+#       mode: 'max'
+#       save_top_k: 1
+#       save_last: false
+#       verbose: true
+      
+    - _target_: pytorch_lightning.callbacks.TQDMProgressBar
+      # leave: true
+      refresh_rate: 1
+
+    logger:
+      _target_: pytorch_lightning.loggers.TensorBoardLogger
+      save_dir: ${output_dir}/${system.name}
+      name: '.'
+      version: '.'
