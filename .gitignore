@@ -5,3 +5,4 @@ CLAUDE.md
 *.egg-info
 
 del*
+*.pt
