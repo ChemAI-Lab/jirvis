@@ -1,14 +1,17 @@
 name: jirvis
 
-
 model:
-  name: resnet # used in logging dir name
-  arch: 
-    _target_: models.resnet50.ResNetFeatureExtractor
-    num_labels: 25
-    model_name: R50 # R101, R52
-    model_type: 3_layer   #       standard, residual, squeeze, 4_layer
+  name: resnet
+  arch:
+    _target_: jirvis.train.models.resnet50.ResNetFeatureExtractor
+    num_labels: 25                                    # overwritten by system.data.label_indices
+    model_name: R50                                   # R18, R34, R50, R101, R152
+    model_type: 4_layer                               # standard, residual, squeeze, 4_layer
     channels: 3
+    pretrained: true                                  # true for ImageNet
+
+data:
+  label_indices: [0, 1, 4, 5, 6, 7, 9, 10, 11, 12]    # Which label indices to train on
 
 
 train:
@@ -26,47 +29,43 @@ train:
   trainer:
     _target_: pytorch_lightning.Trainer
     _convert_: all
-    max_epochs: 50 # 100 # 60000
+    max_epochs: 50 
     check_val_every_n_epoch: 2
     precision: 16-mixed
 
-    # val_check_interval : 1 # 500 # 50 # 3000
-    # log_every_n_steps: 1
-    # limit_val_batches: 1
-    # limit_test_batches: 1
-    # devices:
-    #   - ${device.id} 
-    accumulate_grad_batches: 4
+    devices:
+      - ${device.id} 
+    # accumulate_grad_batches: 4
 
-    accelerator: gpu   
-    devices: [1,2,3]
-    strategy: ddp
+    # accelerator: gpu   
+    # devices: [0, 1]
+    # strategy: ddp
 
     enable_model_summary: false
 
     callbacks:
     - _target_: pytorch_lightning.callbacks.ModelCheckpoint
+      monitor: 'val_macro_f1'
+      mode: 'max'
+      save_top_k: 1
+      save_last: false
+      filename: '${system.model.arch.model_name}-${system.model.arch.model_type}-pretrained_${system.model.arch.pretrained}-${system.model.arch.num_labels}labels-epoch{epoch:02d}-f1{val_macro_f1:.4f}'
+      verbose: true
+
+    - _target_: pytorch_lightning.callbacks.ModelCheckpoint
       monitor: 'val_loss'
       mode: 'min'
       save_top_k: 1
       save_last: true
-      filename: 'jirvis-{epoch}-{best_acc:.4f}'
-      
-    - _target_: pytorch_lightning.callbacks.ModelCheckpoint
-#       dirpath: ${output_dir}/${system.name}/checkpoints
-      filename: "{epoch}-{acc:.4f}"
-      monitor: 'val_loss'
-      mode: 'max'
-      save_top_k: 1
-      save_last: false
+      filename: '${system.model.arch.model_name}-${system.model.arch.model_type}-pretrained_${system.model.arch.pretrained}-${system.model.arch.num_labels}labels-epoch{epoch:02d}-loss{val_loss:.4f}'
       verbose: true
       
     - _target_: pytorch_lightning.callbacks.TQDMProgressBar
-      # leave: true
+      leave: false
       refresh_rate: 1
 
     logger:
       _target_: pytorch_lightning.loggers.TensorBoardLogger
       save_dir: ${output_dir}/${system.model.name}
-      name: '.'
-      version: '.'
+      name: '${system.model.arch.model_name}'
+      version: '${system.model.arch.model_type}_pretrained_${system.model.arch.pretrained}'

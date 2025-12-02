@@ -1,0 +1,7 @@
+**/__pycache__**
+outputs/
+logs/
+CLAUDE.md
+*.egg-info
+
+del*

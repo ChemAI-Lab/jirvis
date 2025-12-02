@@ -1,14 +1,11 @@
 name: sim_ir
 
 data:
-  # data_root: /home/${user}/projects/def-ravh011/shared_data/
-  data_root: /home/rudra/Spectro/downloaded/data/final_data/ir_images_simulated/
+  data_root: ${data_root}/simulated
   dataset: sim_ir
   batch_size: 16
   num_workers: 3
-  model_name: ResNet50
   is_grayscale: True
   use_catch_all: False
   split_ratio: [0.7, 0.2, 0.1]
-  #split_ratio: [0.01, 0.01, 0.98]
 
