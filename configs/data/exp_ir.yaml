@@ -1,0 +1,10 @@
+name: exp_ir
+
+data:
+  data_root: ${data_root}/experimental
+  dataset: exp_ir
+  batch_size: 8
+  num_workers: 3
+  is_grayscale: False
+  use_catch_all: False
+  split_ratio: [0.7, 0.2, 0.1]

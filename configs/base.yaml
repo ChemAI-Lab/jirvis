@@ -3,26 +3,19 @@ defaults:
   - system: jirvis
   - _self_
 
-user: edwinc
+user: root
 
 seed: 42
-process_title: spectro-training
+process_title: jirvis-training
 
-# output_dir: /home/${user}/projects/def-ravh011/shared_data/spectro/${system.name}/${data.name}
-output_dir: /home/rudra/spectro/logs/${system.name}/${data.name}
+output_dir: ./logs/${system.name}/${data.name}
 
-
-load_system_checkpoint:
+# You must specify this
+data_root: ./data/sample/
+load_system_checkpoint: ./data/jirvis.pt # for testing model
 mode: train
 
 device:
   cuda_visible_devices:  "0,1,2,3,4,5,6"
   id: 0
   cuda: cuda:${device.id}
-  
-#   output_subdir: config
-#   run:
-#     dir: ${output_dir}
-#   sweep:
-#     dir: ${output_dir}
-#     subdir: ${hydra.job.override_dirname}
