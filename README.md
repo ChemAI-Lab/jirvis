@@ -1,8 +1,12 @@
-# j-IR-vis: Vision model for Infrared Spectroscopy (IR) embeddings
+<h1 align='center'> j-IR-vis: Vision model for Infrared Spectroscopy (IR) embeddings
 [![DOI:](https://img.shields.io/badge/DOI-10.1063%2F5.0250837-blue)]()
+<h1>
 
 This repository contains the code for reproducing the results for j-IR-vis, or to run inference on custom inputs.
 
+# Modelling
+
+<img src="./assets/jirvis_diagram.png" alt="jirvis pipeline diagram" style="max-width: 25%;" />
 
 ## Dataset
 
@@ -35,14 +39,14 @@ Adjust config files or use command line overrides as below.
 ### j-IR-vis Training
 Using the experimental IR dataset. 
 ```bash
-python3 scripts/train.py data=exp_ir
+python scripts/train.py data=exp_ir
 ```
 To use the simulated dataset, use `data=exp_ir` instead.
 
 ### Running Inference
 
 ```bash
-python3 scripts/inference.py
+python scripts/inference.py
 ```
 
 # Reference
