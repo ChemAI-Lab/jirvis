@@ -1,4 +1,4 @@
-<h1 align='center'><img src="https://github.com/ChemAI-Lab/molpipx/blob/main/Images/molpipx_logo.png" alt="MOLPIPx Logo" width="400"></h1>
+<h1 align='center'><img src="./assets/logo.svg" alt="MOLPIPx Logo" width="400"></h1>
 <h2 align='center'>j-IR-vis: Vision model for Infrared Spectroscopy (IR) embeddings.
 
 
