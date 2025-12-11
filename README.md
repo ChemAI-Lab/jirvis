@@ -8,8 +8,8 @@
 
 This repository contains the code for reproducing the results for j-IR-vis, or to run inference on custom inputs.
 
-# Modelling
-
+## Modelling
+The below diagram illustrates the j-IR-vis pipeline. The input is the raw IR spectrocopy plot, and the output is a Multi Label Classification of the functional groups. The underlying model inspired by the Resnet family of vision models.
 <img src="./assets/jirvis_diagram.png" alt="jirvis pipeline diagram" style="max-width: 25%;" />
 
 ## Dataset
