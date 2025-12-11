@@ -1,6 +1,10 @@
-<h1 align='center'> j-IR-vis: Vision model for Infrared Spectroscopy (IR) embeddings
-[![DOI:](https://img.shields.io/badge/DOI-10.1063%2F5.0250837-blue)]()
-<h1>
+<h1 align='center'><img src="https://github.com/ChemAI-Lab/molpipx/blob/main/Images/molpipx_logo.png" alt="MOLPIPx Logo" width="400"></h1>
+<h2 align='center'>j-IR-vis: Vision model for Infrared Spectroscopy (IR) embeddings.
+
+
+[![DOI:10.1063/5.0250837](https://img.shields.io/badge/DOI-10.1063%2F5.0250837-blue)](https://doi.org/10.1063/5.0250837)
+
+</h2>
 
 This repository contains the code for reproducing the results for j-IR-vis, or to run inference on custom inputs.
 
