@@ -33,7 +33,7 @@ cd jirvis
 ### 2. Create and Activate the Conda Environment
 
 ```bash
-conda env create -f env.yaml
+conda env create -f environment.yaml
 conda activate jirvis
 ```
 
