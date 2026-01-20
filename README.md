@@ -55,18 +55,10 @@ python scripts/inference.py
 
 # Reference
 ```latex
-@article{molpipx,
-    author = {Sondhi, Rudra and Chacko, Edwin R. and Vargas-Hernández, Rodrigo A.},
-    title = {j-IR-vis: Vision model for Infrared spectroscopy embeddings},
-    journal = {},
-    volume = {},
-    number = {},
-    pages = {},
-    year = {2025},
-    month = {},
-    issn = {},
-    doi = {},
-    url = {},
-    eprint = {},
-}
+@article{jirvis,
+title={j-IR-vis: Vision model for Infrared spectroscopy embeddings},
+DOI={10.26434/chemrxiv-2025-d0j2v}, journal={ChemRxiv},
+author={Sondhi, Rudra and Chacko, Edwin and Vargas-Hernández, Rodrigo A.},
+year={2025}
+} 
 ```
