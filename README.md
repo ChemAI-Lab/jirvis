@@ -57,7 +57,8 @@ python scripts/inference.py
 ```latex
 @article{jirvis,
 title={j-IR-vis: Vision model for Infrared spectroscopy embeddings},
-DOI={10.26434/chemrxiv-2025-d0j2v}, journal={ChemRxiv},
+DOI={10.26434/chemrxiv-2025-d0j2v},
+journal={ChemRxiv},
 author={Sondhi, Rudra and Chacko, Edwin and Vargas-Hernández, Rodrigo A.},
 year={2025}
 } 
