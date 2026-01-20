@@ -2,7 +2,7 @@
 <h2 align='center'>j-IR-vis: Vision model for Infrared Spectroscopy (IR) embeddings.
 
 
-[![DOI:10.26434/chemrxiv-2025-d0j2v](https://img.shields.io/badge/DOI-10.1063%2F5.0250837-blue)](10.26434/chemrxiv-2025-d0j2v)
+[![DOI:10.26434/chemrxiv-2025-d0j2v](https://img.shields.io/badge/DOI-10.1063%2F5.0250837-blue)]([10.26434/chemrxiv-2025-d0j2v](https://chemrxiv.org/engage/chemrxiv/article-details/6939bb61bc44e47cf49c5b17))
 
 </h2>
 
