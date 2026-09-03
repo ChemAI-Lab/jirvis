@@ -56,10 +56,20 @@ python scripts/inference.py
 # Reference
 ```latex
 @article{jirvis,
-title={j-IR-vis: Vision model for Infrared spectroscopy embeddings},
-DOI={10.26434/chemrxiv-2025-d0j2v},
-journal={ChemRxiv},
-author={Sondhi, Rudra and Chacko, Edwin and Vargas-Hernández, Rodrigo A.},
-year={2025}
-} 
+    author = {Sondhi, Rudra and Chacko, Edwin and Vargas-Hernández, Rodrigo A.},
+    title = {j-IR-vis: Vision model for infrared spectroscopy embeddings},
+    journal = {The Journal of Chemical Physics},
+    volume = {165},
+    number = {9},
+    pages = {094121},
+    year = {2026},
+    month = {09},
+    issn = {0021-9606},
+    doi = {10.1063/5.0316092},
+    url = {https://doi.org/10.1063/5.0316092},
+}
+
+
+
+
 ```
